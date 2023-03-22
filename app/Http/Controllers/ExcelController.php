@@ -11,12 +11,12 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class ExcelController extends Controller
 {
-    public function bajar(Request $request){
+    public function bajar(int $mes, Request $request){
         // // $admin_id = Auth::guard('admin')->user()->id;
 
         $filenameExport = "RegistroMensual.xlsx";
         try{
-            return Excel::download(new RegistrosUsuarioMesExport(Auth::id()), $filenameExport);
+            return Excel::download(new RegistrosUsuarioMesExport(Auth::id(), $mes), $filenameExport);
         } catch (Exception $e) {
             dd($e);
         }

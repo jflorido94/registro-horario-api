@@ -36,6 +36,7 @@ $router->group(['prefix' => 'prueba', 'middleware' => 'auth'], function () use (
     $router->delete('/{id}',  ['uses' => 'CalendarioGeneralController@destroy', 'as' => 'calendariog_d']);
 });
 $router->get('/try',  ['uses' => 'CalendarioGeneralController@new_year']);
+$router->get('/meses',  ['uses' => 'CalendarioCentroController@meses']);
 
 // ! ---- PRUEBAS ------
 
@@ -109,7 +110,7 @@ $router->group(['prefix' => 'registros', 'middleware' => 'auth'], function () us
 
     $router->delete('/delete/{id}',  ['uses' => 'RegistroController@destroy', 'as' => 'diauser_d']); //TODO check y cliente
 
-    $router->get('/', ['uses' => 'RegistroController@index', 'as' => 'diauser_l']);
+    $router->get('/historial[/{mes:[0-9]+}]', ['uses' => 'RegistroController@index', 'as' => 'diauser_l']);
 
     // $router->post('')
 
@@ -177,7 +178,7 @@ $router->group(['prefix' => 'motivo', 'middleware' => 'auth'], function () use (
 $router->group(['prefix' => 'archivo', 'middleware' => 'auth'], function () use ($router) {
 
     // $router->get('/', ['uses' => 'ExcelController@index']);
-    $router->get('/', ['uses' => 'ExcelController@bajar']);
+    $router->get('/[{mes:[0-9]+}]', ['uses' => 'ExcelController@bajar']);
 });
 
 

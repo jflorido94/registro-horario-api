@@ -69,14 +69,27 @@ class RegistroController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @var mes Meses desde la fecha 2020/01/01
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($mes = null)
     {
         // $user = Usuario::find(Auth::id());
 
-        return response()->json(new RegistroCollection(Registro::where('usuario_id', Auth::id())->orderBy('dia', 'desc')->get()));
+        date_default_timezone_set('UTC'); //para que la fecha que se envie sea la que queremos y no reste las horas del uso horario
+        // $fecha_0 = Carbon::createFromTimestamp(0);
+        $fecha_0 = Carbon::create(2020,1,1);
+        //si no recibimos ningun mes. Suponemos y usaremos el mes actual
+        if ($mes==null) {
+            $hoy = Carbon::now();
+            $mes= $hoy->diffInMonths($fecha_0);
+        }
+
+        $fecha_pag = $fecha_0->addMonths($mes);
+        // dd($fecha_pag);
+
+        return response()->json(['data' => new RegistroCollection(Registro::where('usuario_id', Auth::id())->whereMonth('dia', $fecha_pag->month)->orderBy('dia', 'desc')->get()), 'meta' => ['n_mes' => $mes, 'fecha' => $fecha_pag]]);
     }
 
     /**

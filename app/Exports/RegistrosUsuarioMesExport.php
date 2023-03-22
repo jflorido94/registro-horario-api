@@ -38,9 +38,21 @@ class RegistrosUsuarioMesExport implements WithEvents
     public $cal_usuario;
 
 
-    public function __construct($user_id = null) //TODO: la lista de que usuario descargo?
+    public function __construct($user_id = null, $mes = null) //TODO: la lista de que usuario descargo?
     {
-        $fecha = Carbon::today()->subMonth();
+
+        date_default_timezone_set('UTC'); //para que la fecha que se envie sea la que queremos y no reste las horas del uso horario
+        // $fecha_0 = Carbon::createFromTimestamp(0);
+        $fecha_0 = Carbon::create(2020,1,1);
+        //si no recibimos ningun mes. Suponemos y usaremos el mes actual
+        if ($mes==null) {
+            $hoy = Carbon::now();
+            $mes= $hoy->diffInMonths($fecha_0);
+        }
+
+        $fecha = $fecha_0->addMonths($mes);
+        // dd($fecha);
+
         $this->year = Carbon::instance($fecha)->format('Y');
         $this->mes = mb_convert_case(Carbon::instance($fecha)->locale('es')->monthName, MB_CASE_TITLE);
         $this->startDay = Carbon::instance($fecha)->firstOfMonth()->startOfDay();

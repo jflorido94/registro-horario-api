@@ -192,6 +192,18 @@ class CalendarioCentroController extends Controller
     return response()->json(['mensaje' => 'Calendario generado correctamente ' . $ndias . ' dias'], 201);
   }
 
+  public function meses()
+  {
+    $fecha = Carbon::now();
+    $fecha_0 = Carbon::create(2020);
+
+    dump($meses = $fecha->diffInMonths($fecha_0));
+
+    $fecha_pag = $fecha_0->addMonths($meses);
+
+    dd($fecha_pag->format('Y-m-d'));
+  }
+
   // ? Puedo unificar que calendario es en una tabla y los dias pertenecer a dicho calendario
   // ? Tambien puedo hacer clave compuesta el dia (con el año) y el calendario,
   // ? para conseguir que no se repitan fechas para un mismo calendario.
