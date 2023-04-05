@@ -445,7 +445,7 @@ class RegistroController extends Controller
         }
     }
 
-    public function complete() //recibir mes concreto o rango de fechas o autocompletar ultimos 3 meses
+    public function complete() //? recibir mes concreto o rango de fechas o autocompletar ultimos 3 meses
     {
         $tz = '+0';
         $ndias = 0;

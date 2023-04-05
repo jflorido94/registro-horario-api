@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('motivos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
+            $table->text('descripcion')->nullable();
+            $table->boolean('is_pausa')->default(false);
             $table->timestamps();
         });
     }

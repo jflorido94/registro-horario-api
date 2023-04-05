@@ -16,19 +16,29 @@ class MotivoSeeder extends Seeder
     public function run()
     {
         Motivo::create([
-            'nombre' => 'Comida'
+            'nombre' => 'Comida',
+            'descripcion' => 'Pausa para comer',
+            'is_pausa' => true
         ]);
         Motivo::create([
-            'nombre' => 'Ingles'
+            'nombre' => 'Ingles',
+            'descripcion' => 'Clases de inglés',
+            'is_pausa' => true
         ]);
         Motivo::create([
-            'nombre' => 'Permiso'
+            'nombre' => 'Permiso',
+            'descripcion' => 'Permiso especiales',
+            'is_pausa' => true
         ]);
         Motivo::create([
-            'nombre' => 'Reparacion'
+            'nombre' => 'Reparacion',
+            'descripcion' => 'Extras por reparacion',
+            'is_pausa' => false
         ]);
         Motivo::create([
-            'nombre' => 'Produccion'
+            'nombre' => 'Produccion',
+            'descripcion' => 'Extras por motivos de produccion',
+            'is_pausa' => false
         ]);
     }
 }
