@@ -34,14 +34,13 @@ class MotivoController extends Controller
 
         $rules = array(
             'nombre' => 'required',
-            'descripcion' => 'required',
+            'descripcion' => '',
             'is_pausa' => 'required',
         );
 
         $messages = array(
             'nombre.required' => 'Por favor introduzca el nombre del motivo',
-            'descripcion.required' => 'Por favor introduzca una descripcion del motivo',
-            'nombre.required' => 'Por favor introduzca el nombre del motivo',
+            'is_pausa.required' => 'Por favor introduzca el nombre del motivo',
         );
 
         $validator = Validator::make($request->all(), $rules, $messages );
@@ -54,6 +53,8 @@ class MotivoController extends Controller
         $motivo = new Motivo();
 
         $motivo->nombre = $request->input('nombre');
+        $motivo->descripcion = $request->input('descripcion');
+        $motivo->is_pausa = $request->input('is_pausa');
 
         if ($motivo->save()) {
             return response()->json(['mensaje' => 'Motivo creado correctamente'], 201);
@@ -91,10 +92,9 @@ class MotivoController extends Controller
             return response()->json(['mensaje' => 'Motivo no encontrado'], 404);
         }
 
-        if ($request->user()->centro()->id != $item->centro->id || $request->user()->departamento->name != "Personal") {
-            return response()->json(['mensaje' => 'No tienes permiso para realizar esa accion'], 403);
-        }
-
+        // if ($request->user()->centro()->id != $item->centro->id || $request->user()->departamento->name != "Personal") {
+        //     return response()->json(['mensaje' => 'No tienes permiso para realizar esa accion'], 403);
+        // }
 
         $item->fill($request->all());
 
@@ -120,10 +120,10 @@ class MotivoController extends Controller
 
         $user= Usuario::find(Auth::id());
 
-        // TODO: cambiar "Personal" por depart.id where name == Personal and centro_id == user.centro.id
-        if ($user->centro()->id != $item->centro->id || $user->departamento->name != "Personal") {
-            return response()->json(['mensaje' => 'No tienes permiso para realizar esa accion'], 403);
-        }
+        // // TODO: cambiar "Personal" por depart.id where name == Personal and centro_id == user.centro.id
+        // if ($user->centro()->id != $item->centro->id || $user->departamento->name != "Personal") {
+        //     return response()->json(['mensaje' => 'No tienes permiso para realizar esa accion'], 403);
+        // }
 
         if ($item->delete()) {
             return response()->json(['mensaje' => 'Motivo eliminado correctamente'], 201);

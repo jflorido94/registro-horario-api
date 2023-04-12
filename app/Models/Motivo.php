@@ -17,7 +17,9 @@ class Motivo extends Model
      * @var string[]
      */
     protected $fillable = [
-        'nombre'
+        'nombre',
+        'descripcion',
+        'is_pausa',
     ];
 
     /**
