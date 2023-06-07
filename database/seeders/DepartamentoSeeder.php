@@ -15,18 +15,18 @@ class DepartamentoSeeder extends Seeder
      */
     public function run()
     {
-        Departamento::factory()->create([
-            'nombre' => 'Sistemas',
-        ]);
+        if (Departamento::all()->count() == 0) {
+            Departamento::factory()->create([
+                'nombre' => 'Sistemas',
+            ]);
 
-        Departamento::factory()->create([
-            'nombre' => 'Personal',
-        ]);
+            Departamento::factory()->create([
+                'nombre' => 'Personal',
+            ]);
 
-        Departamento::factory()->create([
-            'nombre' => 'Ingenieria',
-        ]);
-
-        Departamento::factory(4)->create();
+            Departamento::factory()->create([
+                'nombre' => 'Ingenieria',
+            ]);
+        }
     }
 }

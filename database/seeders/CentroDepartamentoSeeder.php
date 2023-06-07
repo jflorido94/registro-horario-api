@@ -23,17 +23,10 @@ class CentroDepartamentoSeeder extends Seeder
         $departamentos = Departamento::all('id');
 
         foreach ($centros as $centro) {
-            $num_dep = $faker->numberBetween(0,count($departamentos));
-
-            $used = array();
-
-            for ($i = 0; $i < $num_dep; $i++) {
-                $dep_id = $faker->randomElement($departamentos);
-                while (in_array($dep_id, $used)) {
-                    $dep_id = $faker->randomElement($departamentos);
+            foreach ($departamentos as $departamento) {
+                if (!$departamento->centros()->where('centro_id',$centro->id)->exists()) {
+                    $centro->departamentos()->attach($departamento->id);
                 }
-                $centro->departamentos()->attach($dep_id);
-                array_push($used, $dep_id);
             }
         }
     }

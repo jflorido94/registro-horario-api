@@ -15,30 +15,32 @@ class MotivoSeeder extends Seeder
      */
     public function run()
     {
-        Motivo::create([
-            'nombre' => 'Comida',
-            'descripcion' => 'Pausa para comer',
-            'is_pausa' => true
-        ]);
-        Motivo::create([
-            'nombre' => 'Ingles',
-            'descripcion' => 'Clases de inglés',
-            'is_pausa' => true
-        ]);
-        Motivo::create([
-            'nombre' => 'Permiso',
-            'descripcion' => 'Permiso especiales',
-            'is_pausa' => true
-        ]);
-        Motivo::create([
-            'nombre' => 'Reparacion',
-            'descripcion' => 'Extras por reparacion',
-            'is_pausa' => false
-        ]);
-        Motivo::create([
-            'nombre' => 'Produccion',
-            'descripcion' => 'Extras por motivos de produccion',
-            'is_pausa' => false
-        ]);
+        if (Motivo::all()->count() == 0) {
+            Motivo::create([
+                'nombre' => 'Comida',
+                'descripcion' => 'Pausa para comer',
+                'is_pausa' => true
+            ]);
+            Motivo::create([
+                'nombre' => 'Ingles',
+                'descripcion' => 'Clases de inglés',
+                'is_pausa' => true
+            ]);
+            Motivo::create([
+                'nombre' => 'Permiso',
+                'descripcion' => 'Permiso especiales',
+                'is_pausa' => true
+            ]);
+            Motivo::create([
+                'nombre' => 'Reparacion',
+                'descripcion' => 'Extras por reparacion',
+                'is_pausa' => false
+            ]);
+            Motivo::create([
+                'nombre' => 'Produccion',
+                'descripcion' => 'Extras por motivos de produccion',
+                'is_pausa' => false
+            ]);
+        }
     }
 }

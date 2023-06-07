@@ -16,17 +16,6 @@ class RoleUsuarioSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create('es_ES');
 
-        $usuarios = Usuario::all();
-        $roles = Role::all('id');
-
-        foreach ($usuarios as $usuario) {
-
-
-                $rol_id = $faker->randomElement($roles);
-                $usuario->roles()->attach($rol_id);
-
-        }
     }
 }

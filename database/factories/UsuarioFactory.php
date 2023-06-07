@@ -13,18 +13,11 @@ class UsuarioFactory extends Factory
 
     public function definition(): array
     {
-        $this->faker = \Faker\Factory::create('es_ES');
 
 
     	return [
-    	    'nombre' => $this->faker->firstname(),
-    	    'apellidos' => $this->faker->lastName(),
-    	    'email' => $this->faker->unique()->companyEmail(),
     	    'password' => app('hash')->make('123456'),
-    	    'first_login' => 0,
-
-            'centro_departamento_id' => $this->faker->randomElement(CentroDepartamento::all('id')),
-
+    	    'first_login' => 1,
             'remember_token' => Str::random(10),
     	];
     }

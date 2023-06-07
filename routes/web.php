@@ -3,6 +3,9 @@
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 use App\Http\Controllers\UserController;
+use App\Models\Centro;
+use App\Models\CentroDepartamento;
+use App\Models\Departamento;
 use App\Models\TipoJornada;
 
 /*
@@ -17,26 +20,26 @@ use App\Models\TipoJornada;
 */
 
 $router->get('/', function () use ($router) {
-    // return Departamento::find(1);
-    return phpinfo();
+
+    // return phpinfo();
     return $router->app->version();
 });
 
 // ! ---- PRUEBAS ------
 
-    /**
-     * Rutas para hacer pruebas, descomentar para usarlas
-     */
-    // $router->group(['prefix' => 'prueba', 'middleware' => 'auth'], function () use ($router) {
+/**
+ * Rutas para hacer pruebas, descomentar para usarlas
+ */
+// $router->group(['prefix' => 'prueba', 'middleware' => 'auth'], function () use ($router) {
 
-    //     $router->get('/', ['uses' => 'CalendarioGeneralController@index', 'as' => 'calendariog_l']);
-    //     $router->post('/', ['uses' => 'CalendarioGeneralController@store', 'as' => 'calendariog_c']);
-    //     $router->get('/{id}', ['uses' => 'CalendarioGeneralController@show', 'as' => 'calendariog_s']);
-    //     $router->post('/{id}',  ['uses' => 'CalendarioGeneralController@update', 'as' => 'calendariog_u']);
-    //     $router->delete('/{id}',  ['uses' => 'CalendarioGeneralController@destroy', 'as' => 'calendariog_d']);
-    // });
-    // $router->get('/try',  ['uses' => 'CalendarioGeneralController@new_year']);
-    // $router->get('/meses',  ['uses' => 'CalendarioCentroController@meses']);
+//     $router->get('/', ['uses' => 'CalendarioGeneralController@index', 'as' => 'calendariog_l']);
+//     $router->post('/', ['uses' => 'CalendarioGeneralController@store', 'as' => 'calendariog_c']);
+//     $router->get('/{id}', ['uses' => 'CalendarioGeneralController@show', 'as' => 'calendariog_s']);
+//     $router->post('/{id}',  ['uses' => 'CalendarioGeneralController@update', 'as' => 'calendariog_u']);
+//     $router->delete('/{id}',  ['uses' => 'CalendarioGeneralController@destroy', 'as' => 'calendariog_d']);
+// });
+// $router->get('/try',  ['uses' => 'CalendarioGeneralController@new_year']);
+// $router->get('/meses',  ['uses' => 'CalendarioCentroController@meses']);
 
 // ! ---- PRUEBAS ------
 
@@ -127,10 +130,10 @@ $router->group(['prefix' => 'calendario', 'middleware' => 'auth'], function () u
 
     $router->post('/',  ['uses' => 'CalendarioCentroController@generar', 'as' => 'cg_g']); //generar los proximos meses, segun dia de la semana
 
-//     $router->post('/show/{id}', ['uses' => 'DiaUserController@show', 'as' => 'diauser_s']);
-//     $router->get('/showById/{id}', ['uses' => 'DiaUserController@showById', 'as' => 'diauser_sID']);
-//     $router->post('/delete[/{id}]',  ['uses' => 'DiaUserController@destroy', 'as' => 'diauser_d']);
-//     // $router->post('/',  ['uses' => 'DiaUserController@update', 'as' => 'diauser_u']);
+    //     $router->post('/show/{id}', ['uses' => 'DiaUserController@show', 'as' => 'diauser_s']);
+    //     $router->get('/showById/{id}', ['uses' => 'DiaUserController@showById', 'as' => 'diauser_sID']);
+    //     $router->post('/delete[/{id}]',  ['uses' => 'DiaUserController@destroy', 'as' => 'diauser_d']);
+    //     // $router->post('/',  ['uses' => 'DiaUserController@update', 'as' => 'diauser_u']);
 });
 
 /**
@@ -140,10 +143,10 @@ $router->group(['prefix' => 'calendario', 'middleware' => 'auth'], function () u
 $router->group(['prefix' => 'tipo-jornada', 'middleware' => 'auth'], function () use ($router) {
 
     $router->get('/', ['uses' => 'TipoJornadaController@index', 'as' => 'tipojor_l']);
-//     $router->post('/', ['uses' => 'TipoJornadaController@store', 'as' => 'tipojor_c']);
-//     $router->get('/{id}', ['uses' => 'TipoJornadaController@show', 'as' => 'tipojor_s']);
-//     $router->post('/{id}',  ['uses' => 'TipoJornadaController@update', 'as' => 'tipojor_u']);
-//     $router->delete('/{id}',  ['uses' => 'TipoJornadaController@destroy', 'as' => 'tipojor_d']);
+    //     $router->post('/', ['uses' => 'TipoJornadaController@store', 'as' => 'tipojor_c']);
+    //     $router->get('/{id}', ['uses' => 'TipoJornadaController@show', 'as' => 'tipojor_s']);
+    //     $router->post('/{id}',  ['uses' => 'TipoJornadaController@update', 'as' => 'tipojor_u']);
+    //     $router->delete('/{id}',  ['uses' => 'TipoJornadaController@destroy', 'as' => 'tipojor_d']);
 });
 
 /**
@@ -179,4 +182,3 @@ $router->group(['prefix' => 'motivo', 'middleware' => 'auth'], function () use (
 $router->group(['prefix' => 'archivo', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/[{mes:[0-9]+}]', ['uses' => 'ExcelController@bajar']);   // descarga el registro del usuario de un mes concreto
 });
-

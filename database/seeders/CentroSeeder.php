@@ -15,11 +15,12 @@ class CentroSeeder extends Seeder
      */
     public function run()
     {
-        Centro::factory()->create([
-            'nombre' => 'BM S.L.U.',
-            'cif' => 'B28241800',
-            'localidad' => 'Loeches',
-        ]);
-        Centro::factory(2)->create();
+        if (Centro::all()->count()==0) {
+            Centro::factory()->create([
+                'nombre' => 'BM S.L.U.',
+                'cif' => 'B28241800',
+                'localidad' => 'Loeches',
+            ]);
+        }
     }
 }

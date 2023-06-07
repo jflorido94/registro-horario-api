@@ -15,17 +15,20 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(
-            ['nombre' => 'Admin']
-        );
-        Role::create(
-            ['nombre' => 'Empleado']
-        );
-        Role::create(
-            ['nombre' => 'Sistemas']
-        );
-        Role::create(
-            ['nombre' => 'Administracion']
-        );
+        if (Role::all()->count() == 0) {
+
+            Role::create(
+                ['nombre' => 'Admin']
+            );
+            Role::create(
+                ['nombre' => 'Empleado']
+            );
+            Role::create(
+                ['nombre' => 'Sistemas']
+            );
+            Role::create(
+                ['nombre' => 'Administracion']
+            );
+        }
     }
 }
