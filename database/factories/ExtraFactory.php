@@ -11,7 +11,6 @@ class ExtraFactory extends Factory
 
     public function definition(): array
     {
-        $this->faker = \Faker\Factory::create('es_ES');
     	return [
     	    //
     	];

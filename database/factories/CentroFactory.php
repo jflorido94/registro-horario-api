@@ -12,11 +12,8 @@ class CentroFactory extends Factory
 
     public function definition(): array
     {
-        $this->faker = \Faker\Factory::create('es_ES');
-    	return [
-    	    'nombre' => $this->faker->unique()->company(),
-    	    'cif' => $this->faker->unique()->vat(),
-    	    'localidad' => $this->faker->unique()->city(),
+        return [
+    	    //
     	];
     }
 }
